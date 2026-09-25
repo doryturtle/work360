@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "WORK360",
+    "slug": "work360",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.work360.app"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "WORK360 memakai mikrofon untuk merekam catatan suara kegiatan."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "WORK360 memakai kamera untuk memotret dokumentasi kegiatan.",
+          "photosPermission": "WORK360 membuka galeri untuk menambahkan foto ke kegiatan."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "WORK360 memakai lokasi untuk mencatat tempat kegiatan."
+        }
+      ]
+    ],
+    "scheme": "work360"
+  }
+}

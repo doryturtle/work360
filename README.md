@@ -12,3 +12,5 @@ apps/mobile   Aplikasi Android (Expo / React Native)
 apps/web      Web Report Center (menyusul, Fase 2)
 docs/         Rencana dan contoh laporan
 ```
+
+Cara mencoba aplikasi di HP: lihat [apps/mobile/README.md](apps/mobile/README.md).
