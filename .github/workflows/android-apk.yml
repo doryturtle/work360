@@ -1,0 +1,69 @@
+name: Build APK Android
+
+on:
+  push:
+    branches: [main, fase1-kerangka-mobile]
+    paths: ['apps/mobile/**', '.github/workflows/android-apk.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/mobile/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: npm ci
+
+      - name: Buat proyek Android (prebuild)
+        run: npx expo prebuild --platform android --no-install
+
+      # Build release ditandatangani dengan debug keystore bawaan Expo:
+      # cukup untuk dipasang langsung di HP, belum untuk Play Store.
+      - name: Build APK
+        working-directory: apps/mobile/android
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Beri nama file APK
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk "work360-${GITHUB_SHA::7}.apk"
+          ls -la *.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: work360-apk
+          path: apps/mobile/work360-*.apk
+
+      # Satu rilis "apk-terbaru" yang selalu diganti, supaya ada link unduh tetap.
+      - name: Terbitkan ke GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete apk-terbaru --yes --cleanup-tag || true
+          gh release create apk-terbaru work360-*.apk \
+            --prerelease \
+            --target "$GITHUB_SHA" \
+            --title "WORK360 APK terbaru (${GITHUB_REF_NAME})" \
+            --notes "APK uji coba dari commit ${GITHUB_SHA::7}. Pasang langsung di HP Android (izinkan instal dari sumber tidak dikenal)."
