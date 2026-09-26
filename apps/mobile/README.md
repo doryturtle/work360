@@ -53,3 +53,7 @@ src/lib/                 tipe data, format tanggal Indonesia, penyimpanan file
 ```
 
 Setiap tabel memakai UUID yang dibuat di HP serta kolom `updated_at` dan `deleted_at`, disiapkan untuk sinkronisasi dengan Supabase/PowerSync di tahap berikutnya.
+
+---
+
+Dibuat oleh **DORAYA STUDIO**. Logo ada di `assets/doraya-studio.png` dan tampil di layar pembuka serta di bagian bawah Beranda.

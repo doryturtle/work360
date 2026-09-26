@@ -14,3 +14,7 @@ docs/         Rencana dan contoh laporan
 ```
 
 Cara mencoba aplikasi di HP: lihat [apps/mobile/README.md](apps/mobile/README.md).
+
+---
+
+Dibuat oleh **DORAYA STUDIO**.

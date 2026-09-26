@@ -1,7 +1,7 @@
 import { Link, router, useFocusEffect } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useCallback, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Button } from '../components/Button';
 import { dayRange, homeCounts, listActivitiesBetween, listRecentActivities } from '../db/repo';
@@ -59,6 +59,16 @@ export default function Home() {
           ))}
         </>
       )}
+
+      <View style={styles.credit}>
+        <Image
+          source={require('../../assets/doraya-studio.png')}
+          style={styles.creditLogo}
+          resizeMode="contain"
+          accessibilityLabel="DORAYA STUDIO"
+        />
+        <Text style={ui.muted}>Dibuat oleh DORAYA STUDIO</Text>
+      </View>
     </ScrollView>
   );
 }
@@ -105,4 +115,6 @@ function Summary({ icon, value, label }: { icon: string; value: number; label: s
 const styles = StyleSheet.create({
   bigButton: { paddingVertical: 20, marginVertical: 8 },
   icon: { fontSize: 22 },
+  credit: { alignItems: 'center', gap: 6, marginTop: 24 },
+  creditLogo: { width: 120, height: 82, borderRadius: 10 },
 });

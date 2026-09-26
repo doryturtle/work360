@@ -40,6 +40,15 @@
         {
           "locationWhenInUsePermission": "WORK360 memakai lokasi untuk mencatat tempat kegiatan."
         }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/doraya-studio.png",
+          "imageWidth": 240,
+          "resizeMode": "contain",
+          "backgroundColor": "#000000"
+        }
       ]
     ],
     "scheme": "work360"
